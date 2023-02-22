@@ -1,6 +1,7 @@
 body{
     display: flex;
     justify-content: center;
+    background-color: rgb(57, 58, 62);
 }
 
 form{
@@ -11,20 +12,34 @@ form{
 .input-field{
     position: relative;
     margin-top: 2rem;
+    width: 200px;
 }
 
 .input-field input{
     padding: 0.8rem;
+    border-color: gray;
+    width: 200px;
+
 }
 
 form .input-field :first-child{
     margin-bottom: 1.5rem;
+
 }
 
 form input[type="submit"]{
     background: linear-gradient(to right, #8e54e9, #6fbbf5);
     color: white;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-top: 2rem;
     padding: 0.4rem;
+}
+
+form button[type="button"]{
+    background: linear-gradient(to right, #8e54e9, #6fbbf5);
+    color: white;
+    border-radius: 6px;
+    margin-top: 2rem;
+    padding: 0.4rem;
+
 }

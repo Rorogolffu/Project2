@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+    <style>
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      input[type="text"],
+      input[type="password"] {
+        padding: 5px;
+        width: 100%;
+        border: none;
+        border-radius: 3px;
+        margin-bottom: 10px;
+      }
+      input[type="submit"] {
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      input[type="submit"]:hover {
+        background-color: #218838;
+      }
+      .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form id="login-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <input type="submit" value="Login">
+    </form>
+
+    <script>
+      const form = document.getElementById('login-form');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const storedUsername = localStorage.getItem('username');
+      const storedPassword = localStorage.getItem('password');
+
+      if (storedUsername && storedPassword) {
+        // Pre-fill the login form with the stored username
+        usernameInput.value = storedUsername;
+
+        // Focus the password field
+        passwordInput.focus();
+      } else {
+        // Focus the username field
+        usernameInput.focus();
+      }
+
+      form.addEventListener('submit', (event) => {
+        // Prevent the form from submitting and refreshing the page
+        event.preventDefault();
+
+        // Check if the provided username and password match the stored information
+        if (usernameInput.value === storedUsername && passwordInput.value === storedPassword) {
+          // Login successful, redirect to home page
+          window.location.href = '//views/testlogin.html';
+        } else {
+          // Login failed, display an error message
+          const errorElement = document.createElement('div');
+          errorElement.className = 'error';
+          errorElement.innerHTML = 'Incorrect username or password';
+          form.appendChild(errorElement);
+        }
+      });
+    </script>
+  </body>
+</html>

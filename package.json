@@ -8,10 +8,20 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "\"# Project2\" \r #\u0000 \u0000P\u0000r\u0000o\u0000j\u0000e\u0000c\u0000t\u00002\u0000\r\u0000 \u0000",
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
-    "express-session": "^1.17.3"
-  }
+    "express-session": "^1.17.3",
+    "passport": "^0.6.0",
+    "passport-facebook": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rorogolffu/Project2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Rorogolffu/Project2/issues"
+  },
+  "homepage": "https://github.com/Rorogolffu/Project2#readme"
 }

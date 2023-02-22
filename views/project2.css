@@ -96,7 +96,7 @@
   width:100%;
   height: 230px;
   background-position:center;
-  backgound-size:cover;
+  background-size:cover;
   border-radius:20px;
   position: relative;
   transition: .4s;
@@ -118,9 +118,9 @@
   position:absolute;
   bottom: 7px;
   left: 12px;
-  color: #fff;
+  color: #7d518b;
 }
-content .box:hover{
+.content .box:hover{
   transform:translateY(-15px);
 }
 .header button{

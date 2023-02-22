@@ -50,11 +50,28 @@ app.post('/user', (req, res) => {
         session = req.session;
         session.userid = req.body.username;
         console.log(req.session)
-        res.sendFile("views/project2.html", {root: __dirname});
+        res.sendFile("views/Homepage.html", {root: __dirname});
     }
-    else{
-        res.send('Invalid username or password');
-    }
+    else {
+        // Login failed, display an error message
+        const errorElement = document.createElement('div');
+        errorElement.className = 'error';
+        errorElement.innerHTML = 'Incorrect username or password';
+        form.appendChild(errorElement);
+      }
+})
+
+/* ROUTES SETUP */
+const port = process.env.PORRT || 3000;
+app.listen(port, () => console.log('App listening on port' + port));
+
+app.get('/', (req, res) => res.sendFile('/views/login2.html', {root : __dirname}));
+app.get('/success', (req, res) => res.send('You have successfully logged in'));
+app.get('/error', (req, res) => res.send('error logging in'));
+
+// page => Error
+app.get('*', (req, res) => {
+    res.send('Page not found (Error 404)')
 })
 
 // page => Logout
@@ -63,9 +80,41 @@ app.get('/logout', (req,res) => {
     res.redirect('/');
 });
 
-// page => Error
-app.get('*', (req, res) => {
-    res.send('Page not found (Error 404)')
-})
 
-app.listen(PORT, () => console.log(`Server Running at port ${PORT}`));
+/* PASSPORT SETUP */
+const passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, cb){
+    cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb){
+    cb(null, obj);
+});
+
+
+/* FACEBOOK AUTH */
+const FacebookStrategy = require('passport-facebook').Strategy;
+
+const FACEBOOK_APP_ID = '1960601660777223';
+const FACEBOOK_APP_SECRET = '5385f9087dfa90796975b174b7aefa0f';
+
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    return cb(null, profile);
+  }));
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+app.get('auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/error' }),
+    function(req, res) {
+        request.redirect('/views/Homepage.html.html');
+    });
